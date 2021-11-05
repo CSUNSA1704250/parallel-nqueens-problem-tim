@@ -74,9 +74,6 @@ void solve(int n){
     for( int i = 0 ; i < n ; i++ )
         solutions[i].push_back(QueenPath(Coord(0,i)));
 
-    cout << "GAGA" << endl;
-
-
     for ( int i = 0 ; i < n-1 ; i++ ){
 
         #pragma omp parallel num_threads(n)
