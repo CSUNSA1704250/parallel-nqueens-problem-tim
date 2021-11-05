@@ -3,8 +3,8 @@
 
 # Compile
 
-g++ main.cpp -fopenmp -o queens
+g++ .\queens.cpp -o queens -fopenmp 
 
 # Run
 
-queens.exe -problemType find -N 5
+queens.exe -problemType all -N 5

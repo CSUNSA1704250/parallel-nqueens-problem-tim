@@ -1,4 +1,5 @@
-#include <iostream>
+
+
 #include <vector>
 #include <math.h>
 #include <mutex>
@@ -7,6 +8,8 @@
 #include "omp.h"
 #include "Coord.h"
 #include "Dot.h"
+
+#include <iostream>
 
 enum Type{
     all,
@@ -37,16 +40,14 @@ void findSolution(int table_size,int row,std::vector<Coord> solution,Type type){
     if (solution.size() < table_size && row < table_size){
         if(solved)
             return;
+
+        #pragma omp parallel for private(solution)
         for(int i = 0 ; i < table_size ; i++){
             if (isFree(table_size,solution,Coord(i,row))){
                 std::vector<Coord> path;
                 path = solution;
                 path.push_back(Coord(i,row));
-                #pragma omp paralel
-                {
-                    findSolution(table_size,row+1,path,type);
-                }
-
+                findSolution(table_size,row+1,path,type);
             }
         }
     }else if (solution.size() == table_size){
@@ -79,6 +80,7 @@ int main(int argc, char* argv[]) {
     std::string beginFile = "---------------------------------------------------------------------\nBEGIN FILE solutions.txt\n___________________________________________\n";
     std::string endFile = "---------------------------------------------------------------------\nEND FILE solutions.txt\n___________________________________________";
 
+    std::cout << omp_get_max_threads() << std::endl;
     output.write(beginFile.c_str(),beginFile.length());
 
     if (argc != 5 )
