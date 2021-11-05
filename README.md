@@ -4,7 +4,9 @@
 # Compile
 
 g++ .\queens.cpp -o queens -fopenmp 
+g++ .\main.cpp -o find -fopenmp 
 
 # Run
 
+find.exe -problemType find -N 5
 queens.exe -problemType all -N 5

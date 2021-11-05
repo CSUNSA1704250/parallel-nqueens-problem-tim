@@ -41,13 +41,16 @@ void findSolution(int table_size,int row,std::vector<Coord> solution,Type type){
         if(solved)
             return;
 
-        #pragma omp parallel for private(solution)
         for(int i = 0 ; i < table_size ; i++){
             if (isFree(table_size,solution,Coord(i,row))){
                 std::vector<Coord> path;
                 path = solution;
                 path.push_back(Coord(i,row));
-                findSolution(table_size,row+1,path,type);
+                #pragma omp parallel
+                {
+                    findSolution(table_size,row+1,path,type);
+                }
+                
             }
         }
     }else if (solution.size() == table_size){
