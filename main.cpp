@@ -64,7 +64,7 @@ void findSolution(int table_size,int row,std::vector<Coord> solution,Type type){
             if (type == find){
                 if (!solved){
                     solveCounter++;
-                    std::string line =  std::to_string(solveCounter) + " " + toString(solution) + '\n' ;
+                    std::string line =  std::to_string(solveCounter) + " " + toString2(solution) + '\n' ;
                     output.write(line.c_str(),line.length());
                     queensFile("graph.dot",solution,table_size);
                     solved = true;
