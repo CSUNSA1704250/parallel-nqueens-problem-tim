@@ -3,10 +3,9 @@
 
 # Compile
 
-g++ .\queens.cpp -o queens -fopenmp 
-g++ .\main.cpp -o find -fopenmp 
+g++ .\reinas.cpp -o reinas -fopenmp 
 
 # Run
 
-find.exe -problemType find -N 5
-queens.exe -problemType all -N 5
+./reinas -problemType all -N 12
+./reinas -problemType find -N 12
